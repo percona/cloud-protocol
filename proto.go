@@ -31,18 +31,20 @@ var Commands []string = []string{
 
 // Sent by user to API
 type Cmd struct {
-	RelayId string	`json:",omitempty"`		// set by API
-	Agent string							// UUID
+	AgentUuid string
 	Cmd string								// one of Commands
 	Data []byte		`json:",omitempty"`		// struct for Cmd, if any
+	// --
+	RelayId string	`json:",omitempty"`		// set by API
 }
 
 // Sent by agent to user (via API)
 type Reply struct {
-	RelayId string							// for API, user can ignore
 	Cmd string								// original Cmd.Cmd 
 	Error string							// success if empty
 	Data []byte		`json:",omitempty"`
+	// --
+	RelayId string							// set by API
 }
 
 // Data for StartService and StopService command replies
