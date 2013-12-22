@@ -13,14 +13,12 @@ const (
 )
 
 type LogEntry struct {
-	User string `json:",omitempty"`
-	Id uint `json:",omitempty"`
 	Level uint
 	Service string
 	Msg string
 }
 
 func (e *LogEntry) String() string {
-	return fmt.Sprintf("user:%s id:%d level:%d service:%s msg: %s",
-		e.User, e.Id, e.Level, e.Service, e.Msg)
+	return fmt.Sprintf("level:%d service:%s msg: %s",
+		e.Level, e.Service, e.Msg)
 }

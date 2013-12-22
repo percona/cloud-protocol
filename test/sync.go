@@ -12,3 +12,17 @@ func WaitRecv(recvChan chan interface{}) interface{} {
 	}
 	return nil
 }
+
+func WaitConsume(msgChan chan string) []string {
+	var buf []string
+	var haveData bool = true
+	for haveData {
+		select {
+		case msg := <-msgChan:
+			buf = append(buf, msg)
+		case <-time.After(100 * time.Millisecond):
+			haveData = false
+		}
+	}
+	return buf
+}
