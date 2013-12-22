@@ -32,8 +32,9 @@ var Commands []string = []string{
 // Sent by user to API
 type Cmd struct {
 	AgentUuid string
-	Cmd string								// one of Commands
-	Data []byte		`json:",omitempty"`		// struct for Cmd, if any
+	Service   string `json:",omitempty"`   // on of Services
+	Cmd       string                       // one of Commands
+	Data      []byte  `json:",omitempty"`  // struct for Cmd, if any
 	// --
 	RelayId string	`json:",omitempty"`		// set by API
 }
