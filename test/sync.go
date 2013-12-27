@@ -4,11 +4,20 @@ import (
 	"time"
 )
 
-func WaitRecv(recvChan chan interface{}) interface{} {
+func WaitRecv(recvChan chan []byte) []byte {
 	select {
 	case data := <-recvChan:
 		return data
 	case <-time.After(500 * time.Millisecond):
+	}
+	return nil
+}
+
+func WaitRecvWithTimeout(recvChan chan []byte, timeout time.Duration) []byte {
+	select {
+	case data := <-recvChan:
+		return data
+	case <-time.After(timeout):
 	}
 	return nil
 }

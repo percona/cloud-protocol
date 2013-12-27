@@ -7,7 +7,7 @@ import (
 
 type WebsocketClient struct {
 	sendChan chan interface{}
-	recvChan chan interface{}
+	recvChan chan []byte
 	// --
 	SendErr error
 	RecvErr error
@@ -15,7 +15,7 @@ type WebsocketClient struct {
 	conn *websocket.Conn
 }
 
-func NewWebsocketClient(sendChan chan interface{}, recvChan chan interface{}) *WebsocketClient {
+func NewWebsocketClient(sendChan chan interface{}, recvChan chan []byte) *WebsocketClient {
 	c := &WebsocketClient{
 		sendChan: sendChan,
 		recvChan: recvChan,
@@ -52,14 +52,14 @@ func (c *WebsocketClient) run() {
 
 	go func() {
 		for {
-			var data interface{}
-			err := websocket.JSON.Receive(c.conn, &data)
+			var data []byte
+			err := websocket.Message.Receive(c.conn, &data)
 			if err != nil {
-				log.Printf("ERROR: websocket.JSON.Receive: %s\n", err)
+				log.Printf("ERROR: websocket.Message.Receive: %s\n", err)
 				c.RecvErr = err
 				break
 			}
-			c.recvChan <-data
+			c.recvChan <- data
 		}
 	}()
 }
