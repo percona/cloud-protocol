@@ -1,6 +1,7 @@
 package test
 
 import (
+	"os"
 	"time"
 	"errors"
 	"encoding/json"
@@ -38,4 +39,25 @@ func WaitConsume(msgChan chan string) []string {
 		}
 	}
 	return buf
+}
+
+func WaitFiles(dir string) []os.FileInfo {
+	for i := 0; i < 3; i++ {
+		files, _ := ioutil.ReadDir(dir)
+		if len(files) > 0 {
+			return files
+		}
+		time.Sleep(100 * time.Millisecond)
+	}
+	files, _ := ioutil.ReadDir(dir)
+	return files
+}
+
+func WaitPost(postChan chan []byte) []byte {
+	select {
+	case data := <-postChan:
+		return data
+	case <-time.After(50 * time.Millisecond):
+		return nil
+	}
 }

@@ -23,20 +23,13 @@ func NewWebsocketClient(sendChan chan interface{}, recvChan chan []byte) *Websoc
 	return c
 }
 
-func (c *WebsocketClient) Connect(url string, origin string) error {
-	conn, err := websocket.Dial(url, "", origin)
-	if err != nil {
-		return err
-	}
-	c.conn = conn
-	c.run()
+func (c *WebsocketClient) Connect() error {
 	return nil
 }
 
-func (c *WebsocketClient) Close() {
-	c.conn.Close()
+func (c *WebsocketClient) Disconnect() error {
+	return nil
 }
-
 
 func (c *WebsocketClient) run() {
 	go func() {
