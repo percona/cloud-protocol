@@ -22,3 +22,9 @@ func (e *LogEntry) String() string {
 	return fmt.Sprintf("level:%d service:%s msg: %s",
 		e.Level, e.Service, e.Msg)
 }
+
+type GetAgentLog struct {
+	Uuid   string
+	Limit  uint
+	Period uint
+}
