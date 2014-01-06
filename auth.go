@@ -14,5 +14,6 @@ type UserAuth struct {
 }
 
 type AuthResponse struct {
+	Code uint
 	Error string
 }
