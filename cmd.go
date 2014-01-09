@@ -47,6 +47,7 @@ type Cmd struct {
 	Service   string `json:",omitempty"` // omit for agent, else one of Services
 	Data      []byte `json:",omitempty"` // struct for Cmd, if any
 	// --
+	CmdId string `json:",omitempty"` // set by User
 	RelayId string `json:",omitempty"` // set by API
 }
 
@@ -56,6 +57,7 @@ type Reply struct {
 	Error string // success if empty
 	Data  []byte `json:",omitempty"`
 	// --
+	CmdId string `json:",omitempty"` // set by User
 	RelayId string // set by API
 }
 
@@ -109,6 +111,7 @@ func (cmd *Cmd) Reply(err error, data interface{}) *Reply {
 	// todo: encoding/json or websocket.JSON doesn't seem to handle error type
 	reply := &Reply{
 		Cmd:     cmd.Cmd,
+		CmdId:   cmd.CmdId,
 		RelayId: cmd.RelayId,
 	}
 	if err != nil {
