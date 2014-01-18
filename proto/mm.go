@@ -8,7 +8,7 @@ type MmEntry struct {
 
 type MmAgent struct {
 	Versions map[string]string `json:"versions"`
-	Hostname string		   `json:"hostname"`
-	Alias	 string		   `json:"alias"`
-	Uuid	 string		   `json:"uuid"`
+	Hostname string            `json:"hostname"`
+	Alias    string            `json:"alias"`
+	Uuid     string            `json:"uuid"`
 }

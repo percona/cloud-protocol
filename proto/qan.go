@@ -8,7 +8,7 @@ type QanEntry struct {
 
 type QanAgent struct {
 	Versions map[string]string `json:"versions"`
-	Hostname string		   `json:"hostname"`
-	Alias	 string		   `json:"alias"`
-	Uuid	 string		   `json:"uuid"`
+	Hostname string            `json:"hostname"`
+	Alias    string            `json:"alias"`
+	Uuid     string            `json:"uuid"`
 }

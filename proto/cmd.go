@@ -47,7 +47,7 @@ type Cmd struct {
 	Service   string `json:",omitempty"` // omit for agent, else one of Services
 	Data      []byte `json:",omitempty"` // struct for Cmd, if any
 	// --
-	CmdId string `json:",omitempty"` // set by User
+	CmdId   string `json:",omitempty"` // set by User
 	RelayId string `json:",omitempty"` // set by API
 }
 
@@ -57,7 +57,7 @@ type Reply struct {
 	Error string // success if empty
 	Data  []byte `json:",omitempty"`
 	// --
-	CmdId string `json:",omitempty"` // set by User
+	CmdId   string `json:",omitempty"` // set by User
 	RelayId string // set by API
 }
 
@@ -69,9 +69,14 @@ type ServiceData struct {
 
 // Data for Status command reply
 type StatusData struct {
-	Agent    string            // agent internals
-	CmdQueue []string          // Cmd.Cmd agent has queued
-	Service  map[string]string // keyed on Services
+	Agent            string
+	AgentCmdHandler  string
+	AgentCmdQueue    []string
+	Qan              string
+	QanLogParser     string
+	QanDataProcessor string
+	Mm               string
+	MmMonitors       map[string]string
 }
 
 // Data for SetLogFile and SetLogLevel commands
