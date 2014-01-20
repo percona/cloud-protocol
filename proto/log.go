@@ -1,14 +1,14 @@
 package proto
 
 import (
-	"fmt"
+	"encoding/json"
 	"time"
 )
 
 // http://en.wikipedia.org/wiki/Syslog#Severity_levels
 const (
-	LOG_EMERGENCY int = iota // not used
-	LOG_ALERT                // not used
+	LOG_EMERGENCY byte = iota // not used
+	LOG_ALERT                 // not used
 	LOG_CRITICAL
 	LOG_ERROR
 	LOG_WARNING
@@ -17,7 +17,7 @@ const (
 	LOG_DEBUG
 )
 
-var LogLevels map[string]int = map[string]int{
+var LogLevels map[string]byte = map[string]byte{
 	"emergency": LOG_EMERGENCY,
 	"alert":     LOG_ALERT,
 	"critical":  LOG_CRITICAL,
@@ -30,19 +30,16 @@ var LogLevels map[string]int = map[string]int{
 
 type LogEntry struct {
 	Ts      time.Time
-	Level   int
+	Level   byte
 	Service string
 	Msg     string
 	Cmd     string `json:",omitempty"`
 }
 
 func (e *LogEntry) String() string {
-	return fmt.Sprintf("level:%d service:%s msg: %s",
-		e.Level, e.Service, e.Msg)
-}
-
-type GetAgentLog struct {
-	Uuid   string
-	Limit  uint
-	Period uint
+	bytes, err := json.Marshal(e)
+	if err != nil {
+		return ""
+	}
+	return string(bytes)
 }

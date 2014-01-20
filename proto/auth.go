@@ -14,6 +14,6 @@ type UserAuth struct {
 }
 
 type AuthResponse struct {
-	Code  uint
-	Error string
+	Code  uint   // standard HTTP status (http://httpstatus.es/)
+	Error string // empty if auth ok (Code=200)
 }

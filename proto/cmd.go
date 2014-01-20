@@ -135,5 +135,10 @@ func (cmd *Cmd) Reply(err error, data interface{}) *Reply {
 
 // Used by pct.Logger and pct.Status to stringify Cmd related to log entries and status updates
 func (cmd *Cmd) String() string {
-	return fmt.Sprintf("Cmd:%s Service:%s User:%s Ts:%s", cmd.Cmd, cmd.Service, cmd.User, cmd.Ts)
+	cmdWithoutData := *cmd
+	bytes, err := json.Marshal(cmdWithoutData)
+	if err != nil {
+		return ""
+	}
+	return string(bytes)
 }
