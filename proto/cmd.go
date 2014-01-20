@@ -74,7 +74,6 @@ type StatusData struct {
 	AgentCmdQueue    []string
 	Qan              string
 	QanLogParser     string
-	QanDataProcessor string
 	Mm               string
 	MmMonitors       map[string]string
 }
