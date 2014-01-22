@@ -135,6 +135,7 @@ func (cmd *Cmd) Reply(err error, data interface{}) *Reply {
 // Used by pct.Logger and pct.Status to stringify Cmd related to log entries and status updates
 func (cmd *Cmd) String() string {
 	cmdWithoutData := *cmd
+	cmdWithoutData.Data = []byte{}
 	bytes, err := json.Marshal(cmdWithoutData)
 	if err != nil {
 		return ""
