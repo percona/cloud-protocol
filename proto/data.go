@@ -4,20 +4,20 @@ import (
 	"time"
 )
 
-type QanData struct {
+type QanReport struct {
 	AgentUuid     string
 	StartTs       time.Time // UTC
 	EndTs         time.Time // UTC
 	SlowLogFile   string    // not slow_query_log_file if rotated
-	StartOffset   uint64    // parsing starts
-	EndOffset     uint64    // parsing stops, but...
-	StopOffset    uint64    // ...parsing didn't complete if stop < end
-	RunTime       uint      // seconds
-	GlobalMetrics []byte
-	ClassMetrics  []byte
+	StartOffset   int64    // parsing starts
+	EndOffset     int64    // parsing stops, but...
+	StopOffset    int64    // ...parsing didn't complete if stop < end
+	RunTime       float64 // seconds
+	Global []byte
+	Class []byte
 }
 
-type MmData struct {
+type MmReport struct {
 	AgentUuid string
 	Ts        time.Time // UTC
 	Duration  uint      // seconds
