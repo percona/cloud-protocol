@@ -43,3 +43,9 @@ func (e *LogEntry) String() string {
 	}
 	return string(bytes)
 }
+
+type GetAgentLog struct {
+	Uuid   string
+	Limit  uint
+	Period uint
+}
