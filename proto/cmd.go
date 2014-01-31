@@ -69,13 +69,13 @@ type ServiceData struct {
 
 // Data for Status command reply
 type StatusData struct {
-	Agent            string
-	AgentCmdHandler  string
-	AgentCmdQueue    []string
-	Qan              string
-	QanLogParser     string
-	Mm               string
-	MmMonitors       map[string]string
+	Agent           string
+	AgentCmdHandler string
+	AgentCmdQueue   []string
+	Qan             string
+	QanLogParser    string
+	Mm              string
+	MmMonitors      map[string]string
 }
 
 // Data for SetLogFile and SetLogLevel commands
@@ -84,7 +84,7 @@ type LogFile struct {
 }
 
 type LogLevel struct {
-	Level int
+	Level byte
 }
 
 /**
