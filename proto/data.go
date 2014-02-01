@@ -4,29 +4,16 @@ import (
 	"time"
 )
 
-type QanReport struct {
-	AgentUuid     string
-	StartTs       time.Time // UTC
-	EndTs         time.Time // UTC
-	SlowLogFile   string    // not slow_query_log_file if rotated
-	StartOffset   int64    // parsing starts
-	EndOffset     int64    // parsing stops, but...
-	StopOffset    int64    // ...parsing didn't complete if stop < end
-	RunTime       float64 // seconds
-	Global []byte
-	Class []byte
+type Data struct {
+	Created         time.Time // when Data was spooled (UTC)
+	Hostname        string    // that agent is running on
+	Service         string    // "qan" or "mm"
+	ContentType     string    // of Data ("application/json")
+	ContentEncoding string    // of Data ("gzip" or empty)
+	Data            []byte    // encoded qan.Report or mm.Report
 }
 
-type MmReport struct {
-	AgentUuid string
-	Ts        time.Time // UTC
-	Duration  uint      // seconds
-	Metrics   []byte
-}
-
-type Transmission struct {
-	Created   time.Time // when Data was spool (UTC)
-	Hostname  string
-	Service   string    // qan or mm
-    Data      []byte    // encoded qan.Report or mm.Report
+type Response struct {
+	Code  uint   // standard HTTP status (http://httpstatus.es/)
+	Error string // empty if ok (Code=200)
 }
