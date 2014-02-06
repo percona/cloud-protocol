@@ -63,8 +63,9 @@ type Reply struct {
 
 // Data for StartService and StopService command replies
 type ServiceData struct {
-	Name   string
-	Config []byte `json:",omitempty"` // cloud-tools/<service>/config.go
+	Name     string
+	ConfigId uint
+	Config   []byte `json:",omitempty"` // cloud-tools/<service>/config.go
 }
 
 // Data for Status command reply
