@@ -14,16 +14,25 @@ import (
 
 var Commands map[string][]string = map[string][]string{
 	// Agent daemon
-	"": []string{
-		"SetLogFile",
+	"agent": []string{
+		// Bootstrap agent:
+		"GetConfig",
+		"SetConfig",
+		// Change config while running:
+		"SetApiHostname",
 		"SetLogLevel",
 		"SetDataDir",
+		"SetLogFile",
+		"SetPidFile",
+		// Start/stop services:
 		"StartService",
 		"StopService",
-		"Status",
-		"Update",
-		"Stop",
+		// Manage agent:
 		"Abort",
+		"Reboot",
+		"Status",
+		"Stop",
+		"Update",
 	},
 	// Query Analytics
 	"qan": []string{},

@@ -17,7 +17,7 @@ const (
 	LOG_DEBUG
 )
 
-var LogLevels map[string]byte = map[string]byte{
+var LogLevelNumber map[string]byte = map[string]byte{
 	"emergency": LOG_EMERGENCY,
 	"alert":     LOG_ALERT,
 	"critical":  LOG_CRITICAL,
@@ -26,6 +26,17 @@ var LogLevels map[string]byte = map[string]byte{
 	"notice":    LOG_NOTICE,
 	"info":      LOG_INFO,
 	"debug":     LOG_DEBUG,
+}
+
+var LogLevelName []string = []string{
+	"emergency",
+	"alert",
+	"critical",
+	"error",
+	"warning",
+	"notice",
+	"info",
+	"debug",
 }
 
 type LogEntry struct {
