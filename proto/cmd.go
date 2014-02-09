@@ -38,8 +38,8 @@ var Commands map[string][]string = map[string][]string{
 	"qan": []string{},
 	// Metrics Monitor
 	"mm": []string{
-		"StartMonitor",
-		"StopMonitor",
+		"StartService",
+		"StopService",
 	},
 }
 
