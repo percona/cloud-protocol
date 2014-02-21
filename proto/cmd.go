@@ -13,33 +13,25 @@ import (
  */
 
 var Commands map[string][]string = map[string][]string{
-	// Agent daemon
-	"agent": []string{
-		// Bootstrap agent:
-		"GetConfig",
+	"": []string{ // standard (all services)
 		"SetConfig",
-		// Change config while running:
-		"SetApiHostname",
-		"SetLogLevel",
-		"SetDataDir",
-		"SetLogFile",
-		"SetPidFile",
-		// Start/stop services:
+		"GetConfig",
+		"Status",
+	},
+	"agent": []string{
 		"StartService",
 		"StopService",
-		// Manage agent:
-		"Abort",
-		"Reboot",
-		"Status",
+		"Restart",
 		"Stop",
+		"Abort",
 		"Update",
 	},
-	// Query Analytics
-	"qan": []string{},
-	// Metrics Monitor
+	"data": []string{},
+	"log":  []string{},
+	"qan":  []string{},
 	"mm": []string{
-		"StartService",
-		"StopService",
+		"StartService", // monitor
+		"StopService",  // monitor
 	},
 }
 
@@ -52,8 +44,8 @@ type Cmd struct {
 	User      string
 	Ts        time.Time
 	AgentUuid string
+	Service   string
 	Cmd       string
-	Service   string `json:",omitempty"` // omit for agent, else one of Services
 	Data      []byte `json:",omitempty"` // struct for Cmd, if any
 	// --
 	CmdId   string `json:",omitempty"` // set by User
@@ -72,13 +64,16 @@ type Reply struct {
 
 // Data for StartService and StopService command replies
 type ServiceData struct {
-	Name     string
-	ConfigId uint
-	Config   []byte `json:",omitempty"` // cloud-tools/<service>/config.go
+	Name   string
+	Config []byte `json:",omitempty"` // cloud-tools/<service>/config.go
+	// --
+	ConfigId uint // set by API
 }
 
 // Data for Status command reply
-type StatusData struct {
+type StatusData map[string]string
+
+/*
 	Agent           string
 	AgentCmdHandler string
 	AgentCmdQueue   []string
@@ -87,15 +82,7 @@ type StatusData struct {
 	Mm              string
 	MmMonitors      map[string]string
 }
-
-// Data for SetLogFile and SetLogLevel commands
-type LogFile struct {
-	File string
-}
-
-type LogLevel struct {
-	Level byte
-}
+*/
 
 /**
  * Functions
