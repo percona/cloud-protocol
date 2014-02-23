@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 )
 
@@ -39,26 +40,25 @@ var Commands map[string][]string = map[string][]string{
  * JSON message structures
  */
 
-// Sent by user to agent via API (API relays Cmd to agent and Reply to user)
+// Sent by API to agent
 type Cmd struct {
-	User      string
 	Ts        time.Time
+	User      string
 	AgentUuid string
 	Service   string
 	Cmd       string
-	Data      []byte `json:",omitempty"` // struct for Cmd, if any
+	Data      []byte `json:",omitempty"`
 	// --
-	CmdId   string `json:",omitempty"` // set by User
 	RelayId string `json:",omitempty"` // set by API
 }
 
 // Sent by agent to user in response to every command
 type Reply struct {
-	Cmd   string // original Cmd.Cmd
-	Error string // success if empty
-	Data  []byte `json:",omitempty"`
+	Cmd    string            // original Cmd.Cmd
+	Error  string            // success if empty
+	Data   []byte            `json:",omitempty"`
+	Status map[string]string `json:",omitempty"`
 	// --
-	CmdId   string `json:",omitempty"` // set by User
 	RelayId string // set by API
 }
 
@@ -69,20 +69,6 @@ type ServiceData struct {
 	// --
 	ConfigId uint // set by API
 }
-
-// Data for Status command reply
-type StatusData map[string]string
-
-/*
-	Agent           string
-	AgentCmdHandler string
-	AgentCmdQueue   []string
-	Qan             string
-	QanLogParser    string
-	Mm              string
-	MmMonitors      map[string]string
-}
-*/
 
 /**
  * Functions
@@ -108,34 +94,42 @@ func (cmd *Cmd) Validate() error {
 	return nil // is valid
 }
 
-func (cmd *Cmd) Reply(err error, data interface{}) *Reply {
+func (cmd *Cmd) Reply(data interface{}, errs ...error) *Reply {
 	// todo: encoding/json or websocket.JSON doesn't seem to handle error type
+
 	reply := &Reply{
 		Cmd:     cmd.Cmd,
-		CmdId:   cmd.CmdId,
 		RelayId: cmd.RelayId,
 	}
-	if err != nil {
-		reply.Error = err.Error()
+	if len(errs) > 0 {
+		errmsgs := make([]string, len(errs))
+		for i, err := range errs {
+			if err == nil {
+				continue
+			}
+			errmsgs[i] = err.Error()
+		}
+		reply.Error = strings.Join(errmsgs, "\n")
 	}
 	if data != nil {
-		codedData, jsonErr := json.Marshal(data)
-		if jsonErr != nil {
-			// This shouldn't happen.
-			log.Fatal(jsonErr)
+		if cmd.Cmd == "Status" {
+			reply.Status = data.(map[string]string)
+		} else {
+			codedData, jsonErr := json.Marshal(data)
+			if jsonErr != nil {
+				// This shouldn't happen.
+				log.Fatal(jsonErr)
+			}
+			reply.Data = codedData
 		}
-		reply.Data = codedData
 	}
 	return reply
 }
 
-// Used by pct.Logger and pct.Status to stringify Cmd related to log entries and status updates
+// [2013-01-01T01:01:03 user@example.com 00000000-0000-0000-0000-000000000000 mm StartService]
 func (cmd *Cmd) String() string {
-	cmdWithoutData := *cmd
-	cmdWithoutData.Data = []byte{}
-	bytes, err := json.Marshal(cmdWithoutData)
-	if err != nil {
-		return ""
-	}
-	return string(bytes)
+	cmdx := *cmd
+	cmdx.Data = nil
+	return fmt.Sprintf("[%s %s %s %s %s]",
+		cmdx.Ts, cmdx.User, cmdx.AgentUuid, cmdx.Service, cmdx.Cmd)
 }
