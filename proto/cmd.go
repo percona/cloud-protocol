@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"time"
+	"strings"
 )
 
 /**
@@ -121,15 +122,22 @@ func (cmd *Cmd) Validate() error {
 	return nil // is valid
 }
 
-func (cmd *Cmd) Reply(err error, data interface{}) *Reply {
+func (cmd *Cmd) Reply(data interface{}, errs ...error) *Reply {
 	// todo: encoding/json or websocket.JSON doesn't seem to handle error type
+
 	reply := &Reply{
 		Cmd:     cmd.Cmd,
-		CmdId:   cmd.CmdId,
 		RelayId: cmd.RelayId,
 	}
-	if err != nil {
-		reply.Error = err.Error()
+	if len(errs) > 0 {
+		errmsgs := make([]string, len(errs))
+		for i, err := range errs {
+			if err == nil {
+				continue
+			}
+			errmsgs[i] = err.Error()
+		}
+		reply.Error = strings.Join(errmsgs, "\n")
 	}
 	if data != nil {
 		codedData, jsonErr := json.Marshal(data)
