@@ -54,10 +54,9 @@ type Cmd struct {
 
 // Sent by agent to user in response to every command
 type Reply struct {
-	Cmd    string            // original Cmd.Cmd
-	Error  string            // success if empty
-	Data   []byte            `json:",omitempty"`
-	Status map[string]string `json:",omitempty"`
+	Cmd   string // original Cmd.Cmd
+	Error string // success if empty
+	Data  []byte `json:",omitempty"`
 	// --
 	RelayId string // set by API
 }
@@ -66,8 +65,6 @@ type Reply struct {
 type ServiceData struct {
 	Name   string
 	Config []byte `json:",omitempty"` // cloud-tools/<service>/config.go
-	// --
-	ConfigId uint // set by API
 }
 
 /**
@@ -112,16 +109,12 @@ func (cmd *Cmd) Reply(data interface{}, errs ...error) *Reply {
 		reply.Error = strings.Join(errmsgs, "\n")
 	}
 	if data != nil {
-		if cmd.Cmd == "Status" {
-			reply.Status = data.(map[string]string)
-		} else {
-			codedData, jsonErr := json.Marshal(data)
-			if jsonErr != nil {
-				// This shouldn't happen.
-				log.Fatal(jsonErr)
-			}
-			reply.Data = codedData
+		codedData, jsonErr := json.Marshal(data)
+		if jsonErr != nil {
+			// This shouldn't happen.
+			log.Fatal(jsonErr)
 		}
+		reply.Data = codedData
 	}
 	return reply
 }
