@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 	"strings"
 )
@@ -14,33 +15,25 @@ import (
  */
 
 var Commands map[string][]string = map[string][]string{
-	// Agent daemon
-	"agent": []string{
-		// Bootstrap agent:
-		"GetConfig",
+	"": []string{ // standard (all services)
 		"SetConfig",
-		// Change config while running:
-		"SetApiHostname",
-		"SetLogLevel",
-		"SetDataDir",
-		"SetLogFile",
-		"SetPidFile",
-		// Start/stop services:
+		"GetConfig",
+		"Status",
+	},
+	"agent": []string{
 		"StartService",
 		"StopService",
-		// Manage agent:
-		"Abort",
-		"Reboot",
-		"Status",
+		"Restart",
 		"Stop",
+		"Abort",
 		"Update",
 	},
-	// Query Analytics
-	"qan": []string{},
-	// Metrics Monitor
+	"data": []string{},
+	"log":  []string{},
+	"qan":  []string{},
 	"mm": []string{
-		"StartService",
-		"StopService",
+		"StartService", // monitor
+		"StopService",  // monitor
 	},
 }
 
@@ -48,16 +41,15 @@ var Commands map[string][]string = map[string][]string{
  * JSON message structures
  */
 
-// Sent by user to agent via API (API relays Cmd to agent and Reply to user)
+// Sent by API to agent
 type Cmd struct {
-	User      string
 	Ts        time.Time
+	User      string
 	AgentUuid string
+	Service   string
 	Cmd       string
-	Service   string `json:",omitempty"` // omit for agent, else one of Services
-	Data      []byte `json:",omitempty"` // struct for Cmd, if any
+	Data      []byte `json:",omitempty"`
 	// --
-	CmdId   string `json:",omitempty"` // set by User
 	RelayId string `json:",omitempty"` // set by API
 }
 
@@ -67,35 +59,13 @@ type Reply struct {
 	Error string // success if empty
 	Data  []byte `json:",omitempty"`
 	// --
-	CmdId   string `json:",omitempty"` // set by User
 	RelayId string // set by API
 }
 
 // Data for StartService and StopService command replies
 type ServiceData struct {
-	Name     string
-	ConfigId uint
-	Config   []byte `json:",omitempty"` // cloud-tools/<service>/config.go
-}
-
-// Data for Status command reply
-type StatusData struct {
-	Agent           string
-	AgentCmdHandler string
-	AgentCmdQueue   []string
-	Qan             string
-	QanLogParser    string
-	Mm              string
-	MmMonitors      map[string]string
-}
-
-// Data for SetLogFile and SetLogLevel commands
-type LogFile struct {
-	File string
-}
-
-type LogLevel struct {
-	Level byte
+	Name   string
+	Config []byte `json:",omitempty"` // cloud-tools/<service>/config.go
 }
 
 /**
@@ -150,13 +120,10 @@ func (cmd *Cmd) Reply(data interface{}, errs ...error) *Reply {
 	return reply
 }
 
-// Used by pct.Logger and pct.Status to stringify Cmd related to log entries and status updates
+// [2013-01-01T01:01:03 user@example.com 00000000-0000-0000-0000-000000000000 mm StartService]
 func (cmd *Cmd) String() string {
-	cmdWithoutData := *cmd
-	cmdWithoutData.Data = []byte{}
-	bytes, err := json.Marshal(cmdWithoutData)
-	if err != nil {
-		return ""
-	}
-	return string(bytes)
+	cmdx := *cmd
+	cmdx.Data = nil
+	return fmt.Sprintf("[%s %s %s %s %s]",
+		cmdx.Ts, cmdx.User, cmdx.AgentUuid, cmdx.Service, cmdx.Cmd)
 }
