@@ -1,6 +1,6 @@
 package proto
 
-type Version struct {
+type VersionsData struct {
 	PerconaAgent string
 	MySQL        string
 }
@@ -18,6 +18,6 @@ type AgentData struct {
 
 type CreateAgentData struct {
 	Hostname string
-	Versions Version
+	Versions VersionsData
 	Configs []AgentData
 }
