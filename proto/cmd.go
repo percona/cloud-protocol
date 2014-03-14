@@ -34,6 +34,10 @@ var Commands map[string][]string = map[string][]string{
 		"StartService", // monitor
 		"StopService",  // monitor
 	},
+	"sysconfig": []string{
+		"StartService", // monitor
+		"StopService",  // monitor
+	},
 }
 
 /**
