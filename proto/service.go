@@ -6,6 +6,12 @@ var ExternalService map[string]uint = map[string]uint{
 	"mysql":  2,
 }
 
+type ServiceInstance struct {
+	Service  string // one of ExternalService
+	Id       uint   // unique for Service: mysql-1, mysql-2, memcached-1, etc.c
+	Instance []byte // one of the structures below
+}
+
 type ServerInstance struct {
 	Id       uint // set by API
 	Hostname string
