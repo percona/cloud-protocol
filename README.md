@@ -54,43 +54,47 @@ proto.Cmd:
 }
 ```
 
+
 ### qan
 ```json
 {
-    "DSN":               "user:pass@(tcp:localhost:3360)/",
-    "Start":             [<queries>],
-    "Stop":              [<queries>],
-    "MaxWorkers":        2,
-    "ReportInterval":    300,
-    "MaxSlowLogSize":    1073741824,
-    "RemoveOldSlowLogs": true,
-    "ExampleQueries":    true,
-    "WorkerRunTime":     500
+    "Service":              "mysql",
+    "InstanceId":           1
+    "Start":                [<queries>],
+    "Stop":                 [<queries>],
+    "MaxWorkers":           2,
+    "ReportInterval":       300,
+    "MaxSlowLogSize":       1073741824,
+    "RemoveOldSlowLogs":    true,
+    "ExampleQueries":       true,
+    "WorkerRunTime":        500
 }
 ```
 
-### mm
+### mm - MySQL
 ```json
 {
-  "Name":            "db1",
-  "Type":            "mysql",
-  "Config":          "<bytes>",
-  "CollectInterval": 1,
-  "ReportInterval":  60
-}
-```
-
-#### mysql
-```json
-{
-    "DSN":               "user:pass@(tcp)/",
-    "InstanceName":      "",                  // optional name of MySQL instance
-    "InnoDB":            "...",               // SET GLOBAL innodb_monitor_enable=<value> 
-    "UserStats":         true,                // SET GLOBAL userstat=ON|OFF
-    "UserStatsIgnoreDb": "",                  // dbs to ignore in user stats
-    "Status":            {                    // SHOW STATUS variables to collect, lowercase
+    "Service":              "mysql",
+    "InstanceId":           1,
+    "Collect":              1,
+    "Report":               60,
+    "InnoDB":               "%",        // SET GLOBAL innodb_monitor_enable=<value> 
+    "UserStats":            true,       // SET GLOBAL userstat=ON|OFF
+    "UserStatsIgnoreDb":    "",         // dbs to ignore in user stats
+    "Status": {                         // SHOW STATUS variables to collect, lowercase
       "bytes_sent":      "counter",
       "bytes_received":  "counter",
-      "threads_running": "guage"
+      "threads_running": "gauge"
     }
 }
+```
+
+### mm - system
+```json
+{
+    "Service":      "server",
+    "InstanceId":   1,
+    "Collect":      10,
+    "Report":       60,
+}
+```
