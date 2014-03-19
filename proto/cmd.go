@@ -2,39 +2,11 @@ package proto
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"strings"
 	"time"
 )
-
-/**
- * Service commands
- */
-
-var Commands map[string][]string = map[string][]string{
-	"": []string{ // standard (all services)
-		"SetConfig",
-		"GetConfig",
-		"Status",
-	},
-	"agent": []string{
-		"StartService",
-		"StopService",
-		"Restart",
-		"Stop",
-		"Abort",
-		"Update",
-	},
-	"data": []string{},
-	"log":  []string{},
-	"qan":  []string{},
-	"mm": []string{
-		"StartService", // monitor
-		"StopService",  // monitor
-	},
-}
 
 /**
  * JSON message structures
@@ -52,7 +24,7 @@ type Cmd struct {
 	RelayId string `json:",omitempty"` // set by API
 }
 
-// Sent by agent to user in response to every command
+// Sent by agent in response to every command
 type Reply struct {
 	Cmd   string // original Cmd.Cmd
 	Error string // success if empty
@@ -70,26 +42,6 @@ type ServiceData struct {
 /**
  * Functions
  */
-
-func (cmd *Cmd) Validate() error {
-	cmds, ok := Commands[cmd.Service]
-	if !ok {
-		return errors.New(fmt.Sprintf("Invalid service: %s", cmd.Service))
-	}
-
-	validCmd := false
-	for _, val := range cmds {
-		if cmd.Cmd == val {
-			validCmd = true
-			break
-		}
-	}
-	if !validCmd {
-		return errors.New(fmt.Sprintf("Invalid command for %s: %s", cmd.Service, cmd.Cmd))
-	}
-
-	return nil // is valid
-}
 
 func (cmd *Cmd) Reply(data interface{}, errs ...error) *Reply {
 	// todo: encoding/json or websocket.JSON doesn't seem to handle error type
