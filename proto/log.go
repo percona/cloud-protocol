@@ -45,6 +45,7 @@ type LogEntry struct {
 	Service string
 	Msg     string
 	Cmd     string `json:",omitempty"`
+	Offline bool   `json:"-"`
 }
 
 func (e *LogEntry) String() string {
