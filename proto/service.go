@@ -21,6 +21,7 @@ type MySQLInstance struct {
 	Id      uint //set by API
 	Name    string
 	DSN     string // [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
-	Distro  string
-	Version string
+	Distro  string `json:",omitempty"`
+	Version string `json:",omitempty"`
 }
+
