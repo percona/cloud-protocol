@@ -18,10 +18,9 @@ type ServerInstance struct {
 }
 
 type MySQLInstance struct {
-	Id      uint //set by API
-	Name    string
-	DSN     string // [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
-	Distro  string `json:",omitempty"`
-	Version string `json:",omitempty"`
+	Id       uint   // set by API
+	Hostname string // @@hostname[.port] if port != 3306
+	DSN      string // [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
+	Distro   string `json:",omitempty"`
+	Version  string `json:",omitempty"`
 }
-
