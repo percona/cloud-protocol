@@ -19,15 +19,35 @@ type ServiceInstance struct {
 	Instance   []byte `json:",omitempty"` // one of the structures below
 }
 
+type Agent struct {
+	UUID string
+	QAN  bool
+}
+
+type Settings struct {
+	AgentUUID string
+	Running   bool
+}
+
 type ServerInstance struct {
-	Id       uint // set by API
-	Hostname string
+	Id       uint     // set by API
+	Hostname string   `json:",omitempty"`
+	Agent    Agent    `json:",omitempty"`
+	Monitors Monitors `json:",omitempty"`
+}
+
+type Monitors struct {
+	Metrics Settings
+	Config  Settings `json:",omitempty"`
 }
 
 type MySQLInstance struct {
-	Id       uint   // set by API
-	Hostname string // @@hostname[.port] if port != 3306
-	DSN      string // [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
-	Distro   string `json:",omitempty"` // MySQL Community Edition, Percona Server, etc.
-	Version  string `json:",omitempty"`
+	Id       uint           // set by API
+	Hostname string         // @@hostname[.port] if port != 3306
+	DSN      string         // [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
+	Distro   string         `json:",omitempty"` // MySQL Community Edition, Percona Server, etc.
+	Version  string         `json:",omitempty"`
+	Server   ServerInstance `json:",omitempty"`
+	Monitors Monitors       `json:",omitempty"`
 }
+
