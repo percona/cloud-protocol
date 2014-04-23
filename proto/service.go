@@ -30,8 +30,10 @@ type Settings struct {
 }
 
 type ServerInstance struct {
-	Id       uint // set by API
-	Hostname string `json:",omitempty"`
+	Id       uint     // set by API
+	Hostname string   `json:",omitempty"`
+	Agent    Agent    `json:",omitempty"`
+	Monitors Monitors `json:",omitempty"`
 }
 
 type Monitors struct {
@@ -40,12 +42,12 @@ type Monitors struct {
 }
 
 type MySQLInstance struct {
-	Id       uint   // set by API
-	Hostname string // @@hostname[.port] if port != 3306
-	DSN      string // [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
-	Distro   string `json:",omitempty"` // MySQL Community Edition, Percona Server, etc.
-	Version  string `json:",omitempty"`
+	Id       uint           // set by API
+	Hostname string         // @@hostname[.port] if port != 3306
+	DSN      string         // [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
+	Distro   string         `json:",omitempty"` // MySQL Community Edition, Percona Server, etc.
+	Version  string         `json:",omitempty"`
 	Server   ServerInstance `json:",omitempty"`
-	Monitors Monitors `json:",omitempty"`
+	Monitors Monitors       `json:",omitempty"`
 }
 
