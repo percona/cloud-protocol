@@ -19,9 +19,24 @@ type ServiceInstance struct {
 	Instance   []byte `json:",omitempty"` // one of the structures below
 }
 
+type Agent struct {
+	UUID string
+	QAN  bool
+}
+
+type Settings struct {
+	AgentUUID string
+	Running   bool
+}
+
 type ServerInstance struct {
 	Id       uint // set by API
-	Hostname string
+	Hostname string `json:",omitempty"`
+}
+
+type Monitors struct {
+	Metrics Settings
+	Config  Settings `json:",omitempty"`
 }
 
 type MySQLInstance struct {
@@ -30,4 +45,7 @@ type MySQLInstance struct {
 	DSN      string // [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]
 	Distro   string `json:",omitempty"` // MySQL Community Edition, Percona Server, etc.
 	Version  string `json:",omitempty"`
+	Server   ServerInstance `json:",omitempty"`
+	Monitors Monitors `json:",omitempty"`
 }
+
