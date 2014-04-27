@@ -50,4 +50,3 @@ type MySQLInstance struct {
 	Server   *ServerInstance `json:",omitempty"`
 	Monitors *Monitors       `json:",omitempty"`
 }
-

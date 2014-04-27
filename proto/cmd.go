@@ -39,6 +39,13 @@ type ServiceData struct {
 	Config []byte `json:",omitempty"` // cloud-tools/<service>/config.go
 }
 
+// Reply from agent to Version command.  The two can differ is agent self-update
+// but hasn't be restarted yet.
+type Version struct {
+	Installed string
+	Running   string
+}
+
 /**
  * Functions
  */
