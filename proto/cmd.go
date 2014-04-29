@@ -78,10 +78,14 @@ func (cmd *Cmd) Reply(data interface{}, errs ...error) *Reply {
 	return reply
 }
 
-// [2013-01-01T01:01:03 user@example.com 00000000-0000-0000-0000-000000000000 mm StartService]
 func (cmd *Cmd) String() string {
 	cmdx := *cmd
 	cmdx.Data = nil
-	return fmt.Sprintf("[%s %s %s %s %s]",
-		cmdx.Ts, cmdx.User, cmdx.AgentUuid, cmdx.Service, cmdx.Cmd)
+	return fmt.Sprintf("%#v", cmdx)
+}
+
+func (reply *Reply) String() string {
+	replyx := *reply
+	replyx.Data = nil
+	return fmt.Sprintf("%#v", replyx)
 }
