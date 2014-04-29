@@ -81,11 +81,14 @@ func (cmd *Cmd) Reply(data interface{}, errs ...error) *Reply {
 func (cmd *Cmd) String() string {
 	cmdx := *cmd
 	cmdx.Data = nil
-	return fmt.Sprintf("%#v", cmdx)
+	return fmt.Sprintf("Cmd[Service:%s Cmd:%s Ts:'%s' User:%s AgentUuid:%s RelayId:%s]",
+		cmdx.Service, cmdx.Cmd,
+		cmdx.Ts, cmdx.User, cmd.AgentUuid,
+		cmdx.RelayId)
 }
 
 func (reply *Reply) String() string {
 	replyx := *reply
 	replyx.Data = nil
-	return fmt.Sprintf("%#v", replyx)
+	return fmt.Sprintf("Reply[Cmd:%s Error:'%s' RelayId:%s]", replyx.Cmd, replyx.Error, replyx.RelayId)
 }
