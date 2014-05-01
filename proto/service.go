@@ -14,19 +14,19 @@ type UniqueInstance struct {
 }
 
 type ServiceInstance struct {
-	Service    string // one of ExternalService
-	InstanceId uint   // unique for Service: mysql-1, mysql-2, memcached-1, etc.c
-	Instance   []byte `json:",omitempty"` // one of the structures below
-}
-
-type Agent struct {
-	UUID string
-	QAN  bool
+	Service    string // internal (agent, log, data) or and ExternalService
+	InstanceId uint   // external service instance ID: server-5, mysql-9, etc.
+	Instance   []byte `json:",omitempty"` // an *Instance structure
 }
 
 type Settings struct {
-	AgentUUID string
+	AgentUuid string
 	Running   bool
+}
+
+type Monitors struct {
+	Metrics *Settings `json:",omitempty"`
+	Config  *Settings `json:",omitempty"`
 }
 
 type ServerInstance struct {
@@ -34,11 +34,6 @@ type ServerInstance struct {
 	Hostname string    `json:",omitempty"`
 	Agent    *Agent    `json:",omitempty"`
 	Monitors *Monitors `json:",omitempty"`
-}
-
-type Monitors struct {
-	Metrics *Settings `json:",omitempty"`
-	Config  *Settings `json:",omitempty"`
 }
 
 type MySQLInstance struct {

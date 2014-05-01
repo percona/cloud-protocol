@@ -44,8 +44,7 @@ type LogEntry struct {
 	Level   byte
 	Service string
 	Msg     string
-	Cmd     string `json:",omitempty"`
-	Offline bool   `json:"-"`
+	Offline bool `json:"-"`
 }
 
 func (e *LogEntry) String() string {
