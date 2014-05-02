@@ -5,10 +5,11 @@ import (
 )
 
 type AgentConfig struct {
-	ServiceInstance
-	Config  string // JSON
-	Running bool
-	Updated time.Time
+	InternalService string
+	ExternalService ServiceInstance
+	Config          string // JSON
+	Running         bool
+	Updated         time.Time
 }
 
 type Agent struct {
@@ -16,6 +17,7 @@ type Agent struct {
 	Hostname string
 	Alias    string
 	Version  string
-	Configs  map[string]AgentConfig `json:",omitempty"`
+	Configs  []AgentConfig `json:",omitempty"`
 	QAN      bool
+	Links    map[string]string `json:",omitempty"`
 }
