@@ -44,6 +44,7 @@ type ServiceData struct {
 type Version struct {
 	Installed string
 	Running   string
+	Revision  string
 }
 
 /**
