@@ -5,10 +5,6 @@ type ExplainQuery struct {
 	Query string
 }
 
-type Explain struct {
-	Result []ExplainRow
-}
-
 type ExplainRow struct {
 	Id           NullInt64
 	SelectType   NullString
