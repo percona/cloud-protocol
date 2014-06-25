@@ -1,7 +1,7 @@
 package proto
 
 type Dashboard struct {
-	DahsboardId uint
+	DashboardId uint
 	Name        string
 	Alias       string
 	Charts      string
