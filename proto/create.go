@@ -20,4 +20,5 @@ type Agent struct {
 	Configs  []AgentConfig `json:",omitempty"`
 	QAN      bool
 	Links    map[string]string `json:",omitempty"`
+	Running  bool
 }
