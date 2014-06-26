@@ -20,7 +20,8 @@ type ServiceInstance struct {
 }
 
 type Settings struct {
-	AgentUuid string
+	AgentUuid string // @todo @obsolete after deploying https://jira.percona.com/browse/PCT-731
+	Agent     *Agent
 	Running   bool
 }
 
