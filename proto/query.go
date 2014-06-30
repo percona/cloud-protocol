@@ -2,6 +2,7 @@ package proto
 
 type ExplainQuery struct {
 	ServiceInstance
+	Db    string
 	Query string
 }
 
