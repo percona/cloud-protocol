@@ -6,6 +6,11 @@ type ExplainQuery struct {
 	Query string
 }
 
+type ExplainResult struct {
+	Classic []*ExplainRow
+	JSON    string
+}
+
 type ExplainRow struct {
 	Id           NullInt64
 	SelectType   NullString
