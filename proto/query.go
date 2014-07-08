@@ -8,14 +8,14 @@ type ExplainQuery struct {
 
 type ExplainResult struct {
 	Classic []*ExplainRow
-	JSON    string
+	JSON    string // since MySQL 5.6.5
 }
 
 type ExplainRow struct {
 	Id           NullInt64
 	SelectType   NullString
 	Table        NullString
-	Partitions   NullString // Since MySQL 5.1, split by comma
+	Partitions   NullString // split by comma; since MySQL 5.1
 	CreateTable  NullString // @todo
 	Type         NullString
 	PossibleKeys NullString // split by comma
