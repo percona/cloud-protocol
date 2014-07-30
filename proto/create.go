@@ -15,7 +15,6 @@ type AgentConfig struct {
 type Agent struct {
 	Uuid     string
 	Hostname string
-	Alias    string
 	Version  string
 	Configs  []AgentConfig `json:",omitempty"`
 	QAN      bool
