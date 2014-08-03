@@ -16,8 +16,8 @@ type Agent struct {
 	Uuid     string
 	Hostname string
 	Version  string
-	Configs  []AgentConfig `json:",omitempty"`
-	QAN      bool
+	Running  bool              // connected to API?
+	QAN      bool              // has QAN config (running or not)?
+	Configs  []AgentConfig     `json:",omitempty"`
 	Links    map[string]string `json:",omitempty"`
-	Running  bool
 }
