@@ -20,7 +20,7 @@ type ExplainRow struct {
 	Type         NullString
 	PossibleKeys NullString // split by comma
 	Key          NullString
-	KeyLen       NullInt64
+	KeyLen       NullString // https://jira.percona.com/browse/PCT-863
 	Ref          NullString
 	Rows         NullInt64
 	Extra        NullString // split by semicolon
