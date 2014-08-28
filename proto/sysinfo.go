@@ -1,5 +1,5 @@
 package proto
 
-type PtCmdResult struct {
+type SysinfoResult struct {
 	Raw string
 }
