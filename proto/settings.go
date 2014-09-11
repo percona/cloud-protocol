@@ -1,8 +1,18 @@
 package proto
 
-type EmailReportSetting struct {
-	Hostname string
+type EmailReportsInstanceSetting struct {
+	Hostname  string
 	Frequency string // daily or weekly
-	Enabled bool
+	Enabled   bool
 }
 
+type EmailReportsSetting struct {
+	Active bool
+	Auto   bool
+	// Instances []EmailReportInstanceSetting
+}
+
+type EmailSetting struct {
+	OptOut bool
+	News   bool
+}
