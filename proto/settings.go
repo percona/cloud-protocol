@@ -3,7 +3,7 @@ package proto
 type EmailReportsInstanceSetting struct {
 	Hostname  string
 	Frequency string // daily or weekly
-	Enabled   bool
+	Active    bool
 }
 
 type EmailReportsSetting struct {
