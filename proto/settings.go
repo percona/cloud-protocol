@@ -1,9 +1,10 @@
 package proto
 
 type EmailReportsInstanceSetting struct {
-	Hostname  string
-	Frequency string // daily or weekly
-	Active    bool
+	InstanceId uint `json:"-"`
+	Hostname   string
+	Frequency  string // daily or weekly
+	Active     bool
 }
 
 type EmailReportsSetting struct {
