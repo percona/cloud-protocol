@@ -14,9 +14,10 @@ type Meta struct {
 
 type Report struct {
 	Snapshot         Snapshot
-	SlowQueries      []Query
-	HighLoadQueries  []Query
-	FirstSeenQueries []Query
+	Chart            Chart
+	SlowQueries      SlowQueries
+	HighLoadQueries  HighLoadQueries
+	FirstSeenQueries FirstSeenQueries
 }
 
 type Snapshot struct {
@@ -28,12 +29,41 @@ type Snapshot struct {
 	ResponseTimePct95Pct float64
 }
 
+type Chart struct {
+	ChartPoints []ChartPoint
+}
+
+type ChartPoint struct {
+	Datetime int
+	Metric   float64
+}
+
+type SlowQueries struct {
+	Queries
+}
+
+type HighLoadQueries struct {
+	Queries
+}
+type FirstSeenQueries struct {
+	Queries
+}
+
+type Queries struct {
+	Queries []Query
+}
+
 type Query struct {
+	Distillate  string
+	Checksum    string
+	Fingerprint string
+	FirstSeen   string
+	LastSeen    string
 	ClassId     string
-	FirstSeen   string `json:",omitempty"`
 	MetricSum   float64
 	MetricPct95 float64
 	MetricAvg   float64
+	MetricMin   float64
 	MetricMax   float64
 	MetricCount int64
 }

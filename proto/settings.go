@@ -4,6 +4,8 @@ type EmailReportsInstanceSetting struct {
 	InstanceId uint `json:"-"`
 	Hostname   string
 	Frequency  string // daily or weekly
+	Day        string `json:"-"`
+	Slot       string `json:"-"`
 	Active     bool
 }
 
