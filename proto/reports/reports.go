@@ -7,6 +7,7 @@ type EmailReport struct {
 
 type Meta struct {
 	Id       uint
+	Uuid	 string
 	TimeZone string
 	Begin    string
 	End      string
