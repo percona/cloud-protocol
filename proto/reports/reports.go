@@ -35,7 +35,7 @@ type Chart struct {
 }
 
 type ChartPoint struct {
-	Datetime int
+	Datetime int64
 	Metric   float64
 }
 
