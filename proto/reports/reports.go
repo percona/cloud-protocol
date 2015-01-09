@@ -7,7 +7,7 @@ type EmailReport struct {
 
 type Meta struct {
 	Id       uint
-	Uuid	 string
+	Uuid     string
 	TimeZone string
 	Begin    string
 	End      string
@@ -55,16 +55,18 @@ type Queries struct {
 }
 
 type Query struct {
-	Distillate  string
-	Checksum    string
-	Fingerprint string
-	FirstSeen   string
-	LastSeen    string
-	ClassId     string
-	MetricSum   float64
-	MetricPct95 float64
-	MetricAvg   float64
-	MetricMin   float64
-	MetricMax   float64
-	MetricCount int64
+	Distillate        string
+	Checksum          string
+	Fingerprint       string
+	FirstSeen         string
+	LastSeen          string
+	ClassId           string
+	MetricSum         float64
+	MetricPct95       float64
+	MetricAvg         float64
+	MetricMin         float64
+	MetricMax         float64
+	MetricCount       int64
+	Load              float64 // Load of the query
+	LoadPct           float64 // Load of the query vs total load in given period
 }
