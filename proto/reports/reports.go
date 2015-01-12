@@ -55,19 +55,26 @@ type Queries struct {
 }
 
 type Query struct {
-	Distillate  string
-	Checksum    string
-	Fingerprint string
-	FirstSeen   string
-	LastSeen    string
-	ClassId     string
-	Rank        string // +x, -x, 0, new
-	MetricSum   float64
-	MetricPct95 float64
-	MetricAvg   float64
-	MetricMin   float64
-	MetricMax   float64
-	MetricCount int64
-	Load        float64 // Load of the query
-	LoadPct     float64 // Load of the query vs total load in given period
+	Distillate        string
+	Checksum          string
+	Fingerprint       string
+	FirstSeen         string
+	LastSeen          string
+	ClassId           int
+	Rank              string // +x, -x, 0, new
+	MetricSum         float64
+	MetricSumChange   float64
+	MetricPct95       float64
+	MetricPct95Change float64
+	MetricAvg         float64
+	MetricAvgChange   float64
+	MetricMin         float64
+	MetricMinChange   float64
+	MetricMax         float64
+	MetricMaxChange   float64
+	MetricCount       int64
+	MetricCountChange float64
+	Load              float64 // Load of the query
+	LoadPct           float64 // Load of the query vs total load in given period
+	LoadChange        float64 // Change in load vs previous period
 }
