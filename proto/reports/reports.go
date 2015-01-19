@@ -28,6 +28,8 @@ type Snapshot struct {
 	QueryLoadPct         float64
 	ResponseTimePct95    float64
 	ResponseTimePct95Pct float64
+	ResponseTimeAvg      float64
+	ResponseTimeAvgPct   float64
 }
 
 type Chart struct {
