@@ -40,7 +40,7 @@ type Chart struct {
 
 type ChartPoint struct {
 	Datetime int64
-	Metric   float64
+	Metric   float32
 }
 
 type SlowQueries struct {
@@ -72,9 +72,9 @@ type Query struct {
 	MetricPct95Change proto.NullFloat64
 	MetricAvg         float64
 	MetricAvgChange   proto.NullFloat64
-	MetricMin         float64
+	MetricMin         float32
 	MetricMinChange   proto.NullFloat64
-	MetricMax         float64
+	MetricMax         float32
 	MetricMaxChange   proto.NullFloat64
 	MetricCount       int64
 	MetricCountChange proto.NullFloat64
