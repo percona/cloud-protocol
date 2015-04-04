@@ -79,10 +79,10 @@ type ShowTableStatus struct {
 }
 
 type TableInfo struct {
-	Create string          `json:",omitempty"`
-	Index  []ShowIndexRow  `json:",omitempty"`
-	Status ShowTableStatus `json:",omitempty"`
-	Errors []string        `json:",omitempty"`
+	Create string                    `json:",omitempty"`
+	Index  map[string][]ShowIndexRow `json:",omitempty"`
+	Status ShowTableStatus           `json:",omitempty"`
+	Errors []string                  `json:",omitempty"`
 }
 
 type TableInfoResult map[string]*TableInfo
