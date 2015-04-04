@@ -81,7 +81,7 @@ type ShowTableStatus struct {
 type TableInfo struct {
 	Create string                    `json:",omitempty"`
 	Index  map[string][]ShowIndexRow `json:",omitempty"`
-	Status ShowTableStatus           `json:",omitempty"`
+	Status *ShowTableStatus          `json:",omitempty"`
 	Errors []string                  `json:",omitempty"`
 }
 
