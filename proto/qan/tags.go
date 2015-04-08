@@ -1,7 +1,7 @@
 package qan
 
 type Tag struct {
-	ID    uint64
+	ID    uint64 `json:"Id"`
 	Name  string
 	Color string
 }
