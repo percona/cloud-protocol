@@ -7,6 +7,7 @@ type Instance struct {
 	ParentUUID string
 	UUID       string
 	Name       string
+	DSN        string
 	Created    time.Time
 	Deleted    time.Time
 	Properties map[string]string
