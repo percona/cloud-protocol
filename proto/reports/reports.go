@@ -16,11 +16,11 @@ type Meta struct {
 }
 
 type Report struct {
-	Snapshot         Snapshot
-	Chart            Chart
-	SlowQueries      SlowQueries
-	HighLoadQueries  HighLoadQueries
-	FirstSeenQueries FirstSeenQueries
+	Snapshot         *Snapshot
+	Chart            *Chart
+	SlowQueries      *SlowQueries
+	HighLoadQueries  *HighLoadQueries
+	FirstSeenQueries *FirstSeenQueries
 }
 
 type Snapshot struct {
