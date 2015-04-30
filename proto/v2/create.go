@@ -5,7 +5,7 @@ import (
 )
 
 type AgentConfig struct {
-	Tool    string
+	Service string
 	UUID    string
 	Config  string // JSON
 	Running bool

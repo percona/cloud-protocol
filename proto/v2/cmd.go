@@ -17,7 +17,7 @@ type Cmd struct {
 	Ts        time.Time
 	User      string
 	AgentUUID string
-	Tool      string
+	Service   string
 	Cmd       string
 	Data      []byte `json:",omitempty"`
 	// --
@@ -33,8 +33,8 @@ type Reply struct {
 	RelayId string // set by API
 }
 
-// Data for StartTool and StopTool command replies
-type ToolData struct {
+// Data for StartService and StopService command replies
+type ServiceData struct {
 	Name   string
 	Config []byte `json:",omitempty"` // cloud-tools/<service>/config.go
 }
@@ -83,7 +83,7 @@ func (cmd *Cmd) String() string {
 	cmdx := *cmd
 	cmdx.Data = nil
 	return fmt.Sprintf("Cmd[Tool:%s Cmd:%s Ts:'%s' User:%s AgentUuid:%s RelayId:%s]",
-		cmdx.Tool, cmdx.Cmd,
+		cmdx.Service, cmdx.Cmd,
 		cmdx.Ts, cmdx.User, cmd.AgentUUID,
 		cmdx.RelayId)
 }

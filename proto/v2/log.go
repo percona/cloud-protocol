@@ -42,7 +42,7 @@ var LogLevelName []string = []string{
 type LogEntry struct {
 	Ts      time.Time
 	Level   byte
-	Tool    string
+	Service string
 	Msg     string
 	Offline bool `json:"-"`
 }
