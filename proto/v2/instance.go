@@ -17,6 +17,8 @@ type Instance struct {
 	Deleted    time.Time
 	Properties map[string]string
 	Subsystems []Instance
+	// --
+	V2 interface{}
 }
 
 type SystemTreeSync struct {
