@@ -20,6 +20,7 @@ type ExplainRow struct {
 	SelectType   NullString
 	Table        NullString
 	Partitions   NullString // split by comma; since MySQL 5.1
+	CreateTable  NullString // @todo
 	Type         NullString
 	PossibleKeys NullString // split by comma
 	Key          NullString
