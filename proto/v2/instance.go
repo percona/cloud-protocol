@@ -3,8 +3,10 @@ package proto
 import "time"
 
 type Subsystem struct {
-	Type   string
-	Prefix string
+	ID       uint `json:"-"`
+	ParentID uint `json:"-"`
+	Type     string
+	Prefix   string
 }
 
 type Instance struct {
