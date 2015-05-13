@@ -1,6 +1,8 @@
 package proto
 
 type Subsystem struct {
-	Type   string
-	Prefix string
+	ID       uint `json:"-"`
+	ParentID uint `json:"-"`
+	Type     string
+	Prefix   string
 }
