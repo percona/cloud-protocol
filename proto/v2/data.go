@@ -22,6 +22,12 @@ type Response struct {
 	Error string // empty if ok (Code=200)
 }
 
+type DataSpoolLimits struct {
+	MaxAge   uint   // seconds
+	MaxSize  uint64 // bytes
+	MaxFiles uint
+}
+
 // QAN data struct, sent by the agent
 type QANReport struct {
 	UUID    string              // UUID of MySQL instance
