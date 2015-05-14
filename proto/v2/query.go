@@ -1,7 +1,7 @@
 package proto
 
 type ExplainQuery struct {
-	ServiceInstance
+	UUID  string
 	Db    string
 	Query string
 }
