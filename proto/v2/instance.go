@@ -2,9 +2,13 @@ package proto
 
 import "time"
 
+// Keep the ID and ParentID fields because they are being used
+// by the subsystems cache
 type Subsystem struct {
-	Type   string
-	Prefix string
+	ID       uint `json:"-"`
+	ParentID uint `json:"-"`
+	Type     string
+	Prefix   string
 }
 
 type Instance struct {
