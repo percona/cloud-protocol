@@ -41,6 +41,8 @@ type Chart struct {
 type ChartPoint struct {
 	Datetime int64
 	Metric   float32
+	QPS      float64
+	Count    int64
 }
 
 type SlowQueries struct {
