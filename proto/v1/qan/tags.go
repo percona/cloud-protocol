@@ -5,3 +5,9 @@ type Tag struct {
 	Name  string
 	Color string
 }
+
+type ClassTag struct {
+	TagId uint
+	Name  string
+	Color string
+}
