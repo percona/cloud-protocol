@@ -31,6 +31,10 @@ func (n *NullString) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+func NewNullInt64(v int64) NullInt64 {
+    return NullInt64{sql.NullInt64{v, true}}
+}
+
 type NullInt64 struct {
 	sql.NullInt64
 }
@@ -54,6 +58,10 @@ func (n *NullInt64) UnmarshalJSON(b []byte) error {
 	}
 	n.Valid = true
 	return nil
+}
+
+func NewNullFloat64(v float64) NullFloat64 {
+    return NullFloat64{sql.NullFloat64{v, true}}
 }
 
 type NullFloat64 struct {
