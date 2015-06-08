@@ -1,5 +1,12 @@
 package qan
 
+import protoV1 "github.com/percona/cloud-protocol/proto/v1"
+
+type MetricsSummary struct {
+	Metrics    []Metric
+	QueryCount protoV1.NullInt64
+}
+
 type Metric struct {
 	Name        string
 	Total       float32
