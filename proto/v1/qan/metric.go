@@ -8,13 +8,12 @@ type MetricsSummary struct {
 }
 
 type Metric struct {
-	Name        string
-	Total       float32
-	Avg         float32
-	Max         float32
-	Min         float32
-	Pct_95      float32
-	Stddev      float32
-	Median      float32
-	Query_count int
+	Name   string
+	Total  protoV1.NullFloat32
+	Avg    protoV1.NullFloat32
+	Max    protoV1.NullFloat32
+	Min    protoV1.NullFloat32
+	Pct_95 protoV1.NullFloat32
+	Stddev protoV1.NullFloat32
+	Median protoV1.NullFloat32
 }
