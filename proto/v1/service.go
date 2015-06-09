@@ -4,6 +4,9 @@ package proto
 var ExternalService map[string]uint = map[string]uint{
 	"server": 1,
 	"mysql":  2,
+	// This is used only for mapping v2 & v3 instances in v2_v3 handler
+	// It should be removed after the complete migration to PCT v3
+	"agent": 3,
 }
 
 // GET /instances returns a list of these, one for each unique hostname:
