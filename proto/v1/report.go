@@ -12,6 +12,4 @@ type MySQLInstancePerf struct {
 	Avg95th    float64 // AVG(Query_time_pct_95)
 	QPS        float64 // QueryCount / ClockTime
 	Load       float64 // QueryTime / ClockTime
-	// Remove after migrating to PCT v3
-	UUID string // v3 instance ID
 }
