@@ -1,6 +1,6 @@
 package reports
 
-import "github.com/percona/cloud-protocol/proto"
+import "github.com/percona/cloud-protocol/proto/v1"
 
 type EmailReport struct {
 	Meta   Meta
@@ -41,6 +41,8 @@ type Chart struct {
 type ChartPoint struct {
 	Datetime int64
 	Metric   float32
+	QPS      float64
+	Count    int64
 }
 
 type SlowQueries struct {

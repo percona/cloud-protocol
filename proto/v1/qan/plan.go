@@ -1,6 +1,6 @@
 package qan
 
-import "github.com/percona/cloud-protocol/proto"
+import "github.com/percona/cloud-protocol/proto/v1"
 
 type QueryPlan struct {
 	Metrics []QueryPlanMetric
