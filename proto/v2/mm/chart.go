@@ -1,7 +1,6 @@
 package mm
 
 import (
-	protoV1 "github.com/percona/cloud-protocol/proto/v1"
 	"time"
 )
 
@@ -29,19 +28,19 @@ type ChartData struct {
 
 // A metric is name and a stat, e.g. avg bytes_read, requested by user.
 type Metric struct {
-	protoV1.ServiceInstance
-	Name   string // bytes_read
-	Stat   string // avg
-	Error  error
-	Values []Value
+	InstanceUUID string
+	Name         string // bytes_read
+	Stat         string // avg
+	Error        error
+	Values       []Value
 }
 
 type Sysconfig struct {
-	protoV1.ServiceInstance
-	System string // mysql global variables
-	Name   string // max_connections
-	Error  error
-	Values []Value
+	InstanceUUID string
+	System       string // mysql global variables
+	Name         string // max_connections
+	Error        error
+	Values       []Value
 }
 
 // Raw metric values are fetched from the database.
