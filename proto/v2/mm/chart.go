@@ -28,7 +28,7 @@ type ChartData struct {
 
 // A metric is name and a stat, e.g. avg bytes_read, requested by user.
 type Metric struct {
-	UUID         string // UUID to identify which series was a result of this Metric, filled in by FE
+	SeriesId     string // Id to identify which series was a result of this Metric, filled in by FE
 	InstanceUUID string
 	Name         string // bytes_read
 	Stat         string // avg
@@ -37,7 +37,7 @@ type Metric struct {
 }
 
 type Sysconfig struct {
-	UUID         string // UUID to identify which series was a result of this Metric, filled in by FE
+	SeriesId     string // Id to identify which series was a result of this Metric, filled in by FE
 	InstanceUUID string
 	System       string // mysql global variables
 	Name         string // max_connections
@@ -63,7 +63,7 @@ type DataPoint struct {
 }
 
 type Series struct {
-	UUID  string // UUID of requested metric (Metric.UUID or Sysconfig.UUID)
-	Error string
-	Data  []DataPoint
+	SeriesId string // Id of requested metric (Metric.SeriesId or Sysconfig.SeriesId)
+	Error    string
+	Data     []DataPoint
 }
