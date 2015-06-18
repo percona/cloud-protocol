@@ -12,6 +12,7 @@ type Subsystem struct {
 }
 
 type Instance struct {
+	ID uint `json:"-"`
 	Subsystem
 	ParentUUID string
 	UUID       string
