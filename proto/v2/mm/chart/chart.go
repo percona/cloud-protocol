@@ -1,4 +1,4 @@
-package mm
+package chart
 
 import (
 	"time"
