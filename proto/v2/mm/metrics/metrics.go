@@ -14,3 +14,12 @@ type Metric struct {
 	Type      string
 	Unit      string
 }
+
+type Configs []Config
+
+type Config struct {
+	Id        uint
+	Subsystem protoV2.Subsystem
+	Name      string
+	Title     string
+}
