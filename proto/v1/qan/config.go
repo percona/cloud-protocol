@@ -8,7 +8,7 @@ type ConfigQuery struct {
 
 type QanConfig struct {
 	Service           string `json:"Service"`
-	InstanceID        int    `json:"InstanceId"`
+	InstanceID        uint   `json:"InstanceId"`
 	CollectFrom       string `json:"CollectFrom"`
 	Interval          int    `json:"Interval"`
 	ExampleQueries    bool   `json:"ExampleQueries"`
