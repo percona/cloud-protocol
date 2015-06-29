@@ -6,7 +6,7 @@ type ConfigQuery struct {
 	Expect string `json:"Expect,omitempty"`
 }
 
-type QanConfig struct {
+type Config struct {
 	Service           string `json:"Service,omitempty"`    // qan, agent, data, etc. Agent 1.0.xx
 	InstanceID        uint   `json:"InstanceId,omitempty"` // V2 instance id. Agent 1.0.xx
 	UUID              string `json:"UUID"`                 // Agent 1.1+
