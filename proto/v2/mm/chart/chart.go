@@ -1,4 +1,4 @@
-package mm
+package chart
 
 type ChartArgs struct {
 	Id        uint
