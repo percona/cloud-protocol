@@ -1,9 +1,5 @@
 package mm
 
-import (
-	"time"
-)
-
 type ChartArgs struct {
 	Id        uint
 	Metrics   []Metric // {Name:"bytes_read", Stat:"pct95"}
@@ -12,10 +8,6 @@ type ChartArgs struct {
 	Begin     string // ... 2014-01-01 00:00:00 UTC
 	End       string // ... 2014-01-07 00:00:00 UTC
 	Group     string // "1 day" (see timeseries.ParsePeriod())
-	// --
-	begin    time.Time
-	end      time.Time
-	realtime bool
 }
 
 type ChartData struct {
